@@ -22,6 +22,11 @@ A polished version of DOS2WASD mod with Linux compatibility, critical bug fixes,
 
 ### Windows
 
+#### Requirements
+- [Visual C++ 2015-2022 Redistributable (x64)](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+
+#### Steps
+
 1. Download `DOS2WASD_Revamped.zip` from [Releases](https://github.com/GosuDRM/DOS2WASD-Revamped/releases)
 2. Extract the zip — it contains a `bin/` folder
 3. Copy the contents of `bin/` to your game's `DefEd/bin/` folder:
