@@ -2,6 +2,8 @@
 
 A polished version of DOS2WASD mod with Linux compatibility, critical bug fixes, better input compatibility, and performance improvements.
 
+[**Download on Nexus Mods**](https://www.nexusmods.com/divinityoriginalsin2definitiveedition/mods/496)
+
 > **🔀 Fork Notice:** This is a fork of [Ch4nKyy/DOS2WASD](https://github.com/Ch4nKyy/DOS2WASD) with improvements and bug fixes.
 
 ## ✨ What's New in Revamped
