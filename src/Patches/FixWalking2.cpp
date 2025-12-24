@@ -1,0 +1,60 @@
+#include "FixWalking2.hpp"
+#include "Settings.hpp"
+#include "State.hpp"
+
+bool FixWalking2::Prepare()
+{
+    std::array<uintptr_t, 1> address_array = { AsAddress(
+        dku::Hook::Assembly::search_pattern<"0F 2F 80 80 0E">()) };
+    addresses = address_array;
+
+    all_found = true;
+    int i = 0;
+    for (const auto& address : addresses)
+    {
+        if (!address)
+        {
+            State::GetSingleton()->mod_found_all_addresses = false;
+            WARN("FixWalking2 #{} not found", i);
+            all_found = false;
+        }
+        ++i;
+    }
+    DEBUG("FixWalking2 found: {:X}", AsAddress(addresses[0]));
+    return all_found;
+}
+
+void FixWalking2::Activate()
+{
+    if (not all_found)
+    {
+        return;
+    }
+
+    if (!handle)
+    {
+        return;
+    }
+    handle->Enable();
+}
+
+void FixWalking2::Deactivate()
+{
+    if (not all_found)
+    {
+        return;
+    }
+
+    if (!handle)
+    {
+        return;
+    }
+    handle->Disable();
+}
+
+void FixWalking2::Enable()
+{
+    FixWalking2Asm patch;
+    patch.ready();
+    handle = dku::Hook::AddASMPatch(addresses[0], { 0, 7 }, &patch);
+}

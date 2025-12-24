@@ -1,0 +1,20 @@
+# Build artifacts
+/build/
+/CMakeCache.txt
+/CMakeFiles/
+
+# vcpkg
+/vcpkg_installed/
+
+# IDE files
+/.vs/
+/.vscode/
+*.sln
+*.vcxproj*
+
+# Distribution packages
+/package/*.zip
+*.zip
+
+# Logs
+*.log
