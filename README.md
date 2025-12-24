@@ -1,6 +1,6 @@
 # DOS2 WASD Movement Revamped
 
-A mod for Divinity: Original Sin 2 that allows direct character movement with hotkeys and improves the camera.
+A polished version of DOS2 WASD mod with Linux compatibility, critical bug fixes, better input compatibility, and performance improvements.
 
 > **🔀 Fork Notice:** This is a fork of [Ch4nKyy/DOS2WASD](https://github.com/Ch4nKyy/DOS2WASD) with improvements and bug fixes.
 
