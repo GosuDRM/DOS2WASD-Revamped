@@ -2,6 +2,17 @@
 
 All notable changes to DOS2WASD Revamped will be documented in this file.
 
+## [3.0.1] - 2024-12-29
+
+### ✨ New Features
+- **Controller Support**
+  - Right stick up/down now controls camera pitch instead of zoom
+  - Hold left stick button + right stick for original zoom functionality
+  - Added `ControllerPitchSpeed` setting in `DOS2WASD.toml`
+  - Process SDL controller axis and button events in PollEventHook
+  - Modified PitchHook and ZoomHook to handle controller input
+  - Added state tracking for `controller_left_stick_pressed` and `controller_right_stick_y`
+
 ## [3.0.0] - 2024-12-24
 
 ### 🚀 Major Changes

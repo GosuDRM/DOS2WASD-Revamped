@@ -157,6 +157,11 @@ ImproveSky = true
 # This reduces visual glitches, when using unlocked pitch.
 # [true, false]
 
+ControllerPitchSpeed = 1.0
+# Controls the camera pitch speed when using a controller right stick.
+# Right stick up/down adjusts pitch. Hold left stick button for zoom instead.
+# [0.0, 10.0]
+
 
 # List of all available keys:
 

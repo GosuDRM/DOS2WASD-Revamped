@@ -1,4 +1,5 @@
 #include "ZoomHook.hpp"
+#include "Addresses/IsInControllerMode.hpp"
 #include "Settings.hpp"
 #include "State.hpp"
 
@@ -45,7 +46,26 @@ void ZoomHook::OverrideFunc(int64_t a1, char a2)
     auto* state = State::GetSingleton();
     auto* settings = Settings::GetSingleton();
 
-    *(float*)(a1 + 1108) *= *(settings->zoom_speed);
+    // In controller mode: zoom only works when left stick is pressed
+    // (right stick Y-axis is used for pitch when left stick is not pressed)
+    if (IsInControllerMode::Read())
+    {
+        if (state->controller_left_stick_pressed.load())
+        {
+            // Left stick is pressed: allow normal zoom behavior
+            *(float*)(a1 + 1108) *= *(settings->zoom_speed);
+        }
+        else
+        {
+            // Left stick is not pressed: disable zoom (pitch is used instead)
+            *(float*)(a1 + 1108) = 0.0f;
+        }
+    }
+    else
+    {
+        // Mouse/keyboard mode: normal zoom behavior
+        *(float*)(a1 + 1108) *= *(settings->zoom_speed);
+    }
 
     return OriginalFunc(a1, a2);
 }

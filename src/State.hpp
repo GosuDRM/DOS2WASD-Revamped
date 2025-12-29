@@ -82,6 +82,10 @@ public:
     int override_atm_far_plane = 0;
     float zoom_before_dialog = -1.0f;
 
+    // controller support
+    std::atomic<bool> controller_left_stick_pressed = false;
+    std::atomic<float> controller_right_stick_y = 0.0f;
+
 private:
     //core
     std::atomic<bool> movement_mode_toggled = true;

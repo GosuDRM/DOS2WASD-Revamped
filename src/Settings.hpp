@@ -45,6 +45,9 @@ public:
     Double max_pitch{ "MaxPitch", "Camera" };
     Boolean improve_sky{ "ImproveSky", "Camera" };
 
+    // Controller support
+    Double controller_pitch_speed{ "ControllerPitchSpeed", "Camera" };
+
     void Load() noexcept;
     std::vector<std::string> GetBoundKeycombos(const std::string& setting);
 

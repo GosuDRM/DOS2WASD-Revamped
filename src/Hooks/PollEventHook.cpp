@@ -4,6 +4,7 @@
 #include "State.hpp"
 #include "SetVirtualCursorPosHook.hpp"
 #include "SDLInputHandler.hpp"
+#include <cmath>
 
 bool PollEventHook::Prepare()
 {
@@ -76,6 +77,34 @@ int64_t PollEventHook::OverrideFunc()
     for (int i = 0; i < num_mouse_events; ++i)
     {
         SDLInputHandler::ProcessEvent(&events[i]);
+    }
+
+    // Process controller events for pitch control
+    // Controller right stick Y-axis controls pitch (instead of zoom in vanilla)
+    // Holding left stick pressed enables original zoom behavior
+    int num_controller_axis_events = SDL_PeepEvents(events, 16, SDL_PEEKEVENT, SDL_CONTROLLERAXISMOTION, SDL_CONTROLLERAXISMOTION);
+    for (int i = 0; i < num_controller_axis_events; ++i)
+    {
+        if (events[i].caxis.axis == SDL_CONTROLLER_AXIS_RIGHTY)
+        {
+            // Normalize axis value from [-32768, 32767] to [-1.0, 1.0]
+            float normalized = events[i].caxis.value / 32767.0f;
+            // Apply deadzone
+            if (std::abs(normalized) < 0.15f)
+            {
+                normalized = 0.0f;
+            }
+            state->controller_right_stick_y = normalized;
+        }
+    }
+
+    int num_controller_button_events = SDL_PeepEvents(events, 16, SDL_PEEKEVENT, SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLERBUTTONUP);
+    for (int i = 0; i < num_controller_button_events; ++i)
+    {
+        if (events[i].cbutton.button == SDL_CONTROLLER_BUTTON_LEFTSTICK)
+        {
+            state->controller_left_stick_pressed = (events[i].type == SDL_CONTROLLERBUTTONDOWN);
+        }
     }
 
     if (*settings->enable_improved_mouselook)

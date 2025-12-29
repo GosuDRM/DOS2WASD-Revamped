@@ -46,6 +46,9 @@ void Settings::Load() noexcept
         config.Bind<-1.0, 1.0>(min_pitch, 0.31);
         config.Bind<0.0, 1.0>(max_pitch, 1.0);
         config.Bind(improve_sky, TRUE);
+
+        // Controller support
+        config.Bind<0.0, 10.0>(controller_pitch_speed, 1.0);
     }
 
     config.Load();
